@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode } from '@nestjs/common';
 import { NewsFeedService } from './news-feed.service';
 import { FetchNewsFeedDto } from './dto/fetch-news-feed.dto';
 
@@ -7,7 +7,8 @@ export class NewsFeedController {
   constructor(private readonly newsFeedService: NewsFeedService) { }
 
   @Post()
-  create(@Body() fetchNewsFeedDto: FetchNewsFeedDto) {
+  @HttpCode(200)
+  getNewsFeed(@Body() fetchNewsFeedDto: FetchNewsFeedDto) {
     return this.newsFeedService.getNews(fetchNewsFeedDto);
   }
 
